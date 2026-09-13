@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Ayla</title>
+  <link rel="icon" href="logo.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .bye { max-width: 560px; margin: 40px auto; }
+    .bye img { width: 64px; height: 64px; border-radius: 16px; }
+    .bye h2 { margin-top: 12px; }
+    .reasons { display: grid; gap: 8px; margin: 18px 0 14px; }
+    .reasons label { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 12px; border: 1px solid var(--line); cursor: pointer; }
+    .reasons label:hover { border-color: var(--accent-2); }
+    .reasons input { accent-color: var(--accent-2); width: 17px; height: 17px; margin: 0; }
+    textarea { width: 100%; min-height: 90px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); font: inherit; resize: vertical; }
+    button { margin-top: 14px; padding: 11px 22px; border: 0; border-radius: 999px; background: var(--accent-2); color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+    button:disabled { opacity: 0.5; cursor: default; }
+    .note { margin: 12px 0 0; font-size: 0.85rem; color: var(--dim); }
+    .thanks { text-align: center; }
+  </style>
+</head>
+<body>
+  <main>
+    <article class="card bye">
+      <form id="form">
+        <img src="logo.png" alt="Ayla">
+        <h2 id="title"></h2>
+        <p id="sub"></p>
+        <div class="reasons" id="reasons"></div>
+        <textarea id="text" maxlength="500"></textarea>
+        <button id="send" type="submit" disabled></button>
+        <p class="note" id="note"></p>
+      </form>
+      <div class="thanks" id="thanks" hidden>
+        <img src="logo.png" alt="Ayla">
+        <h2 id="thanks-title"></h2>
+        <p id="thanks-text"></p>
+      </div>
+    </article>
+  </main>
+  <script>
+    // Ayla o'chirilganda ochiladigan qisqa so'rovnoma. Javob ixtiyoriy va anonim: faqat tanlangan sabab,
+    // izoh (bo'lsa), til va versiya saqlanadi. Ism, email yoki boshqa shaxsiy ma'lumot so'ralmaydi.
+    const T = {
+      en: { title: 'Sorry to see you go', sub: 'Why did you remove Ayla? One click helps us make it better.', reasons: ['A feature I need is missing', 'Too much on the screen', 'It was slow', 'Something did not work', 'I use another new tab', 'Just for now', 'Other'], ph: 'What would make you come back? (optional)', send: 'Send', note: 'Anonymous. We only save your answer, the language and the version.', ty: 'Thank you!', tyText: 'Your answer helps us make Ayla better. You are always welcome back.', err: 'Could not send. Please try again.' },
+      uz: { title: "Ketayotganingizdan afsusdamiz", sub: "Ayla'ni nega o'chirdingiz? Bir bosishingiz uni yaxshilashga yordam beradi.", reasons: ["Kerakli narsa topilmadi", "Ekranda narsa juda ko'p", "Sekin ishladi", "Nimadir ishlamadi", "Boshqa yangi tab ishlataman", "Vaqtincha o'chirdim", "Boshqa sabab"], ph: "Nima qo'shsak, qaytgan bo'lardingiz? (ixtiyoriy)", send: "Yuborish", note: "Anonim. Faqat javobingiz, til va versiya saqlanadi.", ty: "Rahmat!", tyText: "Javobingiz Ayla'ni yaxshilashga yordam beradi. Har doim qaytishingiz mumkin.", err: "Yuborib bo'lmadi. Yana urinib ko'ring." },
+      ru: { title: 'Жаль, что вы уходите', sub: 'Почему вы удалили Ayla? Один клик поможет нам стать лучше.', reasons: ['Не хватает нужной функции', 'Слишком много на экране', 'Работало медленно', 'Что-то не работало', 'Пользуюсь другой новой вкладкой', 'Удалил временно', 'Другое'], ph: 'Что нам добавить, чтобы вы вернулись? (необязательно)', send: 'Отправить', note: 'Анонимно. Сохраняются только ответ, язык и версия.', ty: 'Спасибо!', tyText: 'Ваш ответ поможет сделать Ayla лучше. Возвращайтесь в любое время.', err: 'Не удалось отправить. Попробуйте ещё раз.' },
+      tr: { title: 'Gitmenize üzüldük', sub: 'Ayla’yı neden kaldırdınız? Tek bir tıklama onu geliştirmemize yardımcı olur.', reasons: ['İhtiyacım olan bir özellik yok', 'Ekranda çok fazla şey var', 'Yavaş çalıştı', 'Bir şey çalışmadı', 'Başka bir yeni sekme kullanıyorum', 'Geçici olarak kaldırdım', 'Diğer'], ph: 'Geri dönmeniz için ne eklemeliyiz? (isteğe bağlı)', send: 'Gönder', note: 'Anonim. Yalnızca cevabınız, dil ve sürüm kaydedilir.', ty: 'Teşekkürler!', tyText: 'Cevabınız Ayla’yı geliştirmemize yardımcı olur. Her zaman geri dönebilirsiniz.', err: 'Gönderilemedi. Lütfen tekrar deneyin.' },
+      kk: { title: 'Кетіп жатқаныңызға өкінеміз', sub: 'Ayla-ны неге өшірдіңіз? Бір басуыңыз оны жақсартуға көмектеседі.', reasons: ['Қажетті мүмкіндік жоқ', 'Экранда тым көп нәрсе', 'Баяу жұмыс істеді', 'Бір нәрсе істемеді', 'Басқа жаңа қойынды қолданамын', 'Уақытша өшірдім', 'Басқа себеп'], ph: 'Қайта оралуыңыз үшін не қосайық? (міндетті емес)', send: 'Жіберу', note: 'Анонимді. Тек жауабыңыз, тіл және нұсқа сақталады.', ty: 'Рақмет!', tyText: 'Жауабыңыз Ayla-ны жақсартуға көмектеседі. Кез келген уақытта оралыңыз.', err: 'Жіберу мүмкін болмады. Қайталап көріңіз.' },
+      ky: { title: 'Кетип жатканыңызга өкүнөбүз', sub: 'Ayla’ны эмне үчүн өчүрдүңүз? Бир басууңуз аны жакшыртууга жардам берет.', reasons: ['Керектүү мүмкүнчүлүк жок', 'Экранда өтө көп нерсе', 'Жай иштеди', 'Бир нерсе иштеген жок', 'Башка жаңы өтмөк колдоном', 'Убактылуу өчүрдүм', 'Башка себеп'], ph: 'Кайра келишиңиз үчүн эмнени кошолу? (милдеттүү эмес)', send: 'Жөнөтүү', note: 'Анонимдүү. Жообуңуз, тил жана версия гана сакталат.', ty: 'Рахмат!', tyText: 'Жообуңуз Ayla’ны жакшыртууга жардам берет. Каалаган убакта кайтыңыз.', err: 'Жөнөтүү мүмкүн болбоду. Кайра аракет кылыңыз.' },
+      az: { title: 'Getdiyinizə təəssüf edirik', sub: 'Ayla-nı niyə sildiniz? Bir klik onu yaxşılaşdırmağa kömək edir.', reasons: ['Lazım olan funksiya yoxdur', 'Ekranda həddindən çox şey var', 'Yavaş işlədi', 'Nəsə işləmədi', 'Başqa yeni tab istifadə edirəm', 'Müvəqqəti sildim', 'Başqa səbəb'], ph: 'Qayıtmağınız üçün nə əlavə edək? (istəyə bağlı)', send: 'Göndər', note: 'Anonim. Yalnız cavabınız, dil və versiya saxlanılır.', ty: 'Təşəkkürlər!', tyText: 'Cavabınız Ayla-nı yaxşılaşdırmağa kömək edir. İstənilən vaxt qayıda bilərsiniz.', err: 'Göndərmək alınmadı. Yenidən cəhd edin.' },
+      tg: { title: 'Мутаассифем, ки меравед', sub: 'Чаро Ayla-ро нест кардед? Як зеркунӣ ба беҳтар шудани он кӯмак мекунад.', reasons: ['Имконияти лозима нест', 'Дар экран чизҳо хеле зиёданд', 'Суст кор кард', 'Чизе кор накард', 'Варақаи нави дигарро истифода мебарам', 'Муваққатан нест кардам', 'Сабаби дигар'], ph: 'Чӣ илова кунем, ки баргардед? (ихтиёрӣ)', send: 'Фиристодан', note: 'Беном. Танҳо ҷавоб, забон ва версия нигоҳ дошта мешавад.', ty: 'Ташаккур!', tyText: 'Ҷавоби шумо ба беҳтар шудани Ayla кӯмак мекунад. Ҳар вақт баргардед.', err: 'Фиристода нашуд. Боз кӯшиш кунед.' },
+    };
+    const CODES = ['missing', 'cluttered', 'slow', 'broken', 'other_tab', 'temporary', 'other'];
+    const params = new URLSearchParams(location.search);
+    const raw = (params.get('lang') || navigator.language || 'en').toLowerCase().split('-')[0];
+    const lang = raw === 'kaa' ? 'uz' : T[raw] ? raw : 'en';
+    const L = T[lang];
+    const $ = (id) => document.getElementById(id);
+    document.documentElement.lang = lang;
+    document.title = `${L.title} — Ayla`;
+    $('title').textContent = L.title;
+    $('sub').textContent = L.sub;
+    $('text').placeholder = L.ph;
+    $('send').textContent = L.send;
+    $('note').textContent = L.note;
+    $('thanks-title').textContent = L.ty;
+    $('thanks-text').textContent = L.tyText;
+    L.reasons.forEach((label, i) => {
+      const row = document.createElement('label');
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'reason';
+      input.value = CODES[i];
+      input.addEventListener('change', () => { $('send').disabled = false; });
+      const span = document.createElement('span');
+      span.textContent = label;
+      row.append(input, span);
+      $('reasons').append(row);
+    });
+    $('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const reason = document.querySelector('input[name="reason"]:checked')?.value;
+      if (!reason) return;
+      $('send').disabled = true;
+      const fields = {
+        reason: { stringValue: reason },
+        text: { stringValue: $('text').value.trim().slice(0, 500) },
+        lang: { stringValue: raw.slice(0, 8) },
+        v: { stringValue: String(params.get('v') || '').slice(0, 16) },
+        at: { timestampValue: new Date().toISOString() },
+      };
+      try {
+        const res = await fetch('https://firestore.googleapis.com/v1/projects/ayla-956eb/databases/(default)/documents/feedback?key=AIzaSyDjJM0NpN-6XAAihAjY3InWtQzW6WUKS0c', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ fields }),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        $('form').hidden = true;
+        $('thanks').hidden = false;
+      } catch {
+        $('note').textContent = L.err;
+        $('send').disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
