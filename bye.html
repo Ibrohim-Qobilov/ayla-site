@@ -93,13 +93,41 @@
         v: { stringValue: String(params.get('v') || '').slice(0, 16) },
         at: { timestampValue: new Date().toISOString() },
       };
+      function esc(s) {
+        return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+      const textVal = $('text').value.trim().slice(0, 500);
+      const checkedInput = document.querySelector('input[name="reason"]:checked');
+      const reasonLabel = checkedInput?.parentElement?.textContent?.trim() || reason;
+      const ver = String(params.get('v') || 'noma\'lum').slice(0, 16);
+
+      const tgMsg = `📉 <b>Ayla o'chirildi (Feedback)</b>\n\n` +
+        `❓ <b>Sabab:</b> ${esc(reasonLabel)}\n` +
+        (textVal ? `💬 <b>Izoh:</b> ${esc(textVal)}\n` : '') +
+        `🌐 <b>Til:</b> ${esc(raw)}\n` +
+        `📦 <b>Versiya:</b> ${esc(ver)}\n` +
+        `🕒 <b>Vaqt:</b> ${new Date().toLocaleString('uz-UZ', { timeZone: 'Asia/Tashkent' })}`;
+
+      try {
+        await fetch('https://api.telegram.org/bot<REVOKED>/sendMessage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: '-1004306592319',
+            text: tgMsg,
+            parse_mode: 'HTML',
+          }),
+        });
+      } catch (err) {
+        console.warn('Telegram feedback error:', err);
+      }
+
       try {
         await fetch('https://firestore.googleapis.com/v1/projects/ayla-956eb/databases/(default)/documents/feedback?key=AIzaSyDjJM0NpN-6XAAihAjY3InWtQzW6WUKS0c', {
           method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ fields }),
         });
-      } catch (err) {
-        console.warn('Feedback save note:', err);
-      }
+      } catch (err) {}
+
       $('form').hidden = true;
       $('thanks').hidden = false;
     });
