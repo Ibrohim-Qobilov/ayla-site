@@ -98,6 +98,13 @@
           method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ fields }),
         });
       } catch (err) {}
+      // Egasining Telegram'iga ham: Cloudflare Worker orqali. Bot kaliti Worker'da maxfiy saqlanadi, bu sahifada yo'q
+      try {
+        await fetch('https://portfolio-telegram-proxy.ibrokhim112.workers.dev/ayla-bye', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ reason, text: fields.text.stringValue, lang: fields.lang.stringValue, v: fields.v.stringValue }),
+        });
+      } catch (err) {}
 
       $('form').hidden = true;
       $('thanks').hidden = false;
