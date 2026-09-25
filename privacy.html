@@ -12,7 +12,7 @@
   <main>
     <article class="card">
       <h2>Privacy Policy</h2>
-      <p class="meta">Effective date: 24 September 2026</p>
+      <p class="meta">Effective date: 25 September 2026</p>
       <p>Ayla ("we", "the extension") is a browser extension that replaces your browser's new tab page. It is developed by Ibrohim Qobilov (Uzbekistan), who is responsible for your data (the "controller"). This policy explains what data Ayla uses, where it is stored and what choices you have.</p>
       <p>In short: Ayla works without an account and keeps your data in your browser. It shows no ads, has no analytics or tracking, and never sells your data.</p>
 
@@ -44,7 +44,7 @@
         <li>"Time on sites" data.</li>
         <li>The prayer log. Information about religious practice is a special category of data, so it stays on your device.</li>
         <li>Your calendar connection.</li>
-        <li>Your Trello and Todoist keys.</li>
+        <li>Your Trello, Todoist and ClickUp keys.</li>
       </ul>
 
       <h3>3. Calendar (optional)</h3>
@@ -77,9 +77,10 @@
       <h3>6. Integrations you connect yourself</h3>
       <ul>
         <li><b>Trello.</b> You sign in on Trello's page (Atlassian). Ayla can then read your boards, show your account name, and create or update cards in the list you choose. The access key stays on your device. Tasks linked to cards sync together with your other tasks (section 2).</li>
-        <li><b>Todoist.</b> You paste your personal API token. It stays on your device. Ayla uses it only to sync tasks between Ayla and Todoist.</li>
+        <li><b>Todoist.</b> You sign in on Todoist's page, or paste your personal API token. Ayla uses the access only to sync tasks between Ayla and Todoist (create, rename, change the date, complete). The keys stay on your device. When you sign in, Todoist's one-time code and, about once an hour while you use Ayla, the key renewal pass through our small Cloudflare server, which stores nothing.</li>
+        <li><b>ClickUp.</b> You sign in on ClickUp's page. Ayla can then read your workspaces, lists and tasks, show the names and pictures of the people tasks are assigned to, and create or update tasks (status, name, due date, priority, assignees). If you choose lists to watch, Ayla checks them for new tasks every 5 minutes in the background; notifications about them are off unless you turn them on. The access key stays on your device. To finish signing in, ClickUp's one-time code passes through our small Cloudflare server, which exchanges it for the key and stores nothing. Tasks in the ClickUp tab sync together with your other tasks (section 2).</li>
       </ul>
-      <p>You can disconnect either service at any time in Settings.</p>
+      <p>You can disconnect any of these services at any time in Settings.</p>
 
       <h3>7. Services Ayla connects to</h3>
       <p>To provide its features, Ayla requests public information from the following services. These requests do not include your account data.</p>
@@ -94,7 +95,8 @@
         <tr><td>Google favicon service</td><td>Icons for your quick links (the site's domain is sent)</td></tr>
         <tr><td>namoz-vaqti.uz, AlAdhan</td><td>Prayer times, only when the prayer widget is available and you add it (city or coordinates)</td></tr>
         <tr><td>Google Firebase, Google Calendar API</td><td>Optional sign-in, sync and calendar</td></tr>
-        <tr><td>Trello (Atlassian), Todoist</td><td>Only if you connect them (section 6)</td></tr>
+        <tr><td>Trello (Atlassian), Todoist, ClickUp</td><td>Only if you connect them (section 6)</td></tr>
+        <tr><td>Cloudflare Workers</td><td>Only when you connect ClickUp or Todoist: exchanging the one-time sign-in code for your access key and renewing Todoist's hourly key (nothing is stored)</td></tr>
       </table>
 
       <h3>8. Feedback when you uninstall</h3>
@@ -109,7 +111,7 @@
       <h3>9. Why we process your data (legal bases)</h3>
       <ul>
         <li><b>Account and sync:</b> to provide the service you asked for (GDPR Art. 6(1)(b)).</li>
-        <li><b>Location, calendar, Trello, Todoist and Time on sites:</b> your consent (Art. 6(1)(a)). You can withdraw it at any time by turning the feature off or disconnecting.</li>
+        <li><b>Location, calendar, Trello, Todoist, ClickUp and Time on sites:</b> your consent (Art. 6(1)(a)). You can withdraw it at any time by turning the feature off or disconnecting.</li>
       </ul>
 
       <h3>10. Where data is stored</h3>
@@ -167,14 +169,14 @@
               <li>«Saytlarda o'tgan vaqt»;</li>
               <li>namoz kundaligi;</li>
               <li>taqvim ulanishi;</li>
-              <li>Trello va Todoist kalitlari.</li>
+              <li>Trello, Todoist va ClickUp kalitlari.</li>
             </ul>
           </li>
           <li>Google Taqvim faqat o'qish uchun ulanadi. Tadbirlar faqat qurilmangizda saqlanadi, taqvimingiz o'zgartirilmaydi.</li>
           <li>Joylashuv faqat ob-havo, valyuta va namoz vaqtlari uchun ishlatiladi va qurilmangizda saqlanadi. Yomg'ir ogohlantirishi yoqilsa, ob-havo soatiga bir marta tekshiriladi.</li>
           <li>«Saytlarda o'tgan vaqt» (Plus) standart holatda o'chiq. Yoqsangiz, faol tabdagi saytning nomi (masalan, youtube.com) va unda o'tgan vaqt sanaladi. Bu ma'lumot 30 kun faqat qurilmangizda saqlanadi va hech qayerga yuborilmaydi.</li>
           <li>Kunlik limitda faqat ro'yxatingizdagi saytlar sanaladi. «Saqlangan tablar» va «Keyinroq o'qish» sahifa manzilini faqat siz bosganingizda saqlaydi.</li>
-          <li>Trello va Todoist'ni faqat o'zingiz ulaysiz. Kalitlar qurilmangizda qoladi.</li>
+          <li>Trello, Todoist va ClickUp'ni faqat o'zingiz ulaysiz. Kalitlar qurilmangizda qoladi. ClickUp va Todoist'ga kirishda bir martalik kod (Todoist'da soatiga bir marta kalitni yangilash ham) kichik Cloudflare serverimiz orqali o'tadi, server hech narsa saqlamaydi.</li>
           <li>Kengaytmani o'chirganingizda qisqa so'rovnoma ochiladi. Javob berish ixtiyoriy va anonim: faqat tanlangan sabab, izoh, til va versiya olinadi. Javob Firebase'da saqlanadi va ishlab chiquvchining yopiq Telegram kanaliga ham yuboriladi. Izohga shaxsiy ma'lumot yozmang.</li>
           <li>Hisob 16 yosh va undan kattalar uchun. Hisobsiz Ayla'dan istalgan yoshdagi odam foydalana oladi.</li>
           <li>Ma'lumotlaringizni ko'rish va yuklab olish: Sozlamalar → Hisob → Ma'lumotlarim.</li>
