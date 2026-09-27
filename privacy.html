@@ -12,27 +12,27 @@
   <main>
     <article class="card">
       <h2>Privacy Policy</h2>
-      <p class="meta">Effective date: 25 September 2026</p>
+      <p class="meta">Effective date: 27 September 2026</p>
       <p>Ayla ("we", "the extension") is a browser extension that replaces your browser's new tab page. It is developed by Ibrohim Qobilov (Uzbekistan), who is responsible for your data (the "controller"). This policy explains what data Ayla uses, where it is stored and what choices you have.</p>
       <p>In short: Ayla works without an account and keeps your data in your browser. It shows no ads, has no analytics or tracking, and never sells your data.</p>
 
       <h3>1. Data stored on your device</h3>
       <p>The following is stored locally in your browser (<code>chrome.storage</code>):</p>
       <ul>
-        <li>Your settings and main goal.</li>
+        <li>Your settings, daily and weekly goals, and your goal history (each day's goal and whether you completed it).</li>
         <li>Tasks and task lists, notes, habits, reminders and your class schedule.</li>
         <li>Focus statistics, achievements and the water log.</li>
         <li>Favorite wallpapers, uploaded images, quick links (Speed Dial) and quotes.</li>
         <li>The read-later list and saved tabs.</li>
         <li>The prayer log and "Time on sites" data, if you use those features.</li>
       </ul>
-      <p>This data never leaves your device unless you sign in (section 2) or connect a service yourself (section 6). Uninstalling the extension deletes it.</p>
+      <p>This data never leaves your device unless you sign in (section 2), connect a service yourself (section 6) or join a Focus together room (section 7). Uninstalling the extension deletes it.</p>
 
       <h3>2. Optional account and sync</h3>
       <p>Signing in is optional. You can sign in with email and password, Google or GitHub. Sign-in is provided by Google Firebase Authentication. When you sign in, we receive your email address, display name and profile photo URL from the provider you choose.</p>
       <p>So that your data appears on all your devices, a copy of the following is stored in Google Cloud Firestore:</p>
       <ul>
-        <li>Settings, main goal, tasks and task lists, notes, habits and reminders.</li>
+        <li>Settings, daily and weekly goals and your goal history, tasks and task lists, notes, habits and reminders.</li>
         <li>Your class schedule and water log.</li>
         <li>Quotes, favorite wallpapers, quick links and the read-later list (page addresses and titles).</li>
         <li>Focus statistics and achievements.</li>
@@ -41,10 +41,11 @@
       <p><b>Never synced:</b></p>
       <ul>
         <li>Uploaded images and saved tabs.</li>
+        <li>Your recent searches in the search bar.</li>
         <li>"Time on sites" data.</li>
         <li>The prayer log. Information about religious practice is a special category of data, so it stays on your device.</li>
         <li>Your calendar connection.</li>
-        <li>Your Trello, Todoist and ClickUp keys.</li>
+        <li>Your keys and links for connected services (Trello, Todoist, ClickUp, Jira, Notion, Asana, GitHub, Bitrix24, Microsoft To Do, Google Tasks, Slack, Telegram).</li>
       </ul>
 
       <h3>3. Calendar (optional)</h3>
@@ -66,10 +67,13 @@
       <p>All of these are optional. Their data stays on your device, except the read-later list, which is synced as described in section 2.</p>
       <ul>
         <li><b>Site blocking and daily limits.</b> Blocking works inside your browser, using only the sites you add to your list. If you set a daily limit, Ayla counts time only on those sites, and only while that tab is active.</li>
+        <li><b>Shorts &amp; Reels.</b> This is off by default. If you turn it on, Ayla asks for access to YouTube, Instagram and TikTok. Your browser then opens YouTube Shorts as regular videos and sends Instagram Reels and TikTok to an Ayla page, and a small script hides the Shorts and Reels shelves and buttons on YouTube and Instagram. The script reads nothing from those pages and sends nothing anywhere; it only reads Ayla's own settings and focus timer.</li>
+        <li><b>Only allowed sites during focus.</b> This is off by default. If you turn it on and allow access to all sites, your browser blocks every site that isn't on your allowed list, but only during a focus session. The addresses you visit are not recorded. As with your block list, an attempt to open a blocked site during focus counts as a distraction: the site name is kept only for that session's summary and the daily count for 14 days, on your device only.</li>
         <li><b>Time on sites (Ayla Plus).</b> This is off by default. If you turn it on and allow the "read your tabs" permission, Ayla records the site name (for example <code>youtube.com</code>, not the full address) of the active tab and how long it stays in front. It counts only while the browser window is in focus and you are at your computer. Ayla uses this data only to show you where your time went. It is kept on your device for 30 days, then deleted automatically. It is never synced, never added to backup files and never sent anywhere.</li>
         <li><b>Saved tabs.</b> When you click Save, Ayla stores the addresses and titles of the tabs in the current window.</li>
         <li><b>Read later.</b> When you use the right-click menu or the shortcut, Ayla saves the address and title of that page only.</li>
         <li><b>Task from selected text.</b> When you choose it from the right-click menu, the text you selected becomes a task.</li>
+        <li><b>Search bar.</b> Your last searches are kept on your device only; you can turn this off or clear it in Settings. <b>Web suggestions</b> are off by default: if you turn them on, the text you type is sent to the search engine you chose (Google, Yandex, Bing or DuckDuckGo) to get suggestions — the same place your search goes when you press Enter. <b>Voice search</b> is off by default: it uses your browser's own speech recognition (in Chrome it is provided by Google). Ayla never receives or stores the audio.</li>
         <li><b>Quick link suggestions.</b> If you allow it, Ayla reads your most visited sites once, to suggest quick links. The list stays on your device.</li>
       </ul>
       <p>Ayla does not collect your browsing history for any other purpose.</p>
@@ -79,27 +83,50 @@
         <li><b>Trello.</b> You sign in on Trello's page (Atlassian). Ayla can then read your boards, show your account name, and create or update cards in the list you choose. The access key stays on your device. Tasks linked to cards sync together with your other tasks (section 2).</li>
         <li><b>Todoist.</b> You sign in on Todoist's page, or paste your personal API token. Ayla uses the access only to sync tasks between Ayla and Todoist (create, rename, change the date, complete). The keys stay on your device. When you sign in, Todoist's one-time code and, about once an hour while you use Ayla, the key renewal pass through our small Cloudflare server, which stores nothing.</li>
         <li><b>ClickUp.</b> You sign in on ClickUp's page. Ayla can then read your workspaces, lists and tasks, show the names and pictures of the people tasks are assigned to, and create or update tasks (status, name, due date, priority, assignees). If you choose lists to watch, Ayla checks them for new tasks every 5 minutes in the background; notifications about them are off unless you turn them on. The access key stays on your device. To finish signing in, ClickUp's one-time code passes through our small Cloudflare server, which exchanges it for the key and stores nothing. Tasks in the ClickUp tab sync together with your other tasks (section 2).</li>
+        <li><b>Jira.</b> You sign in on Atlassian's page. Ayla can then read the open Jira issues assigned to you (name, due date, status), close them, rename them or change the due date, and create new issues in the project you choose. Issues are never deleted. The one-time sign-in code and the hourly key renewal pass through our small Cloudflare server, which stores nothing. The keys stay on your device.</li>
+        <li><b>Notion.</b> You sign in on Notion's page and choose which pages Ayla may see. Ayla reads tasks from the database you pick (title, due date, done), marks them done, renames them or changes the date, and adds new pages. Pages are never deleted. The one-time code passes through our Cloudflare server; the key stays on your device.</li>
+        <li><b>Asana.</b> You sign in on Asana's page. Ayla reads the incomplete tasks assigned to you in the workspace you choose, completes, renames or reschedules them, and creates new tasks in My Tasks. The one-time code and the hourly key renewal pass through our Cloudflare server; the keys stay on your device.</li>
+        <li><b>GitHub.</b> You sign in on GitHub's page. Ayla reads open issues assigned to you (including private repositories, which is why GitHub asks for the "repo" permission), closes or renames them, and creates new issues in the repository you choose. Pull requests are not read. The one-time code passes through our Cloudflare server; the key stays on your device.</li>
+        <li><b>Bitrix24.</b> You paste an inbound webhook link from your own Bitrix24 portal; no sign-in page is involved. The link is a secret key: it stays only on your device and is never sent to us. Ayla talks directly to your portal to read your open tasks, complete, rename or reschedule them, and create new tasks. Tasks are never deleted.</li>
+        <li><b>Microsoft To Do.</b> You sign in on Microsoft's page. Ayla reads your name and the tasks in the list you choose, completes, renames or reschedules them, and creates new tasks. The one-time code and the key renewal pass through our Cloudflare server, which stores nothing; the keys stay on your device.</li>
+        <li><b>Google Tasks.</b> You sign in on Google's page. Ayla reads the tasks in the list you choose, completes, renames or reschedules them, and creates new tasks. The access key is kept in memory only until you close the browser, and no server of ours is involved. Disconnecting also revokes the access at Google.</li>
+        <li><b>Slack.</b> You sign in on Slack's page. When a focus session starts, Ayla sets your Slack status to "Focusing" and pauses notifications until the session ends; if you stop early, it removes them. Ayla cannot read your messages or channels. The one-time code passes through our Cloudflare server; the key stays on your device, and disconnecting revokes it at Slack.</li>
+        <li><b>Telegram.</b> You connect by opening Ayla's bot with a one-time code; no Telegram sign-in is used. Messages you send to the bot become tasks or "read later" links in Ayla. If you turn them on, your evening summary and task reminders are sent to you in Telegram. Message text passes through Telegram and our Cloudflare server. Our server keeps only a random connection key with your chat ID, your Telegram name and language, and messages Ayla has not picked up yet. Each message is deleted once Ayla receives it, unused codes after 1 hour, untouched connections after 90 days, and everything as soon as you disconnect.</li>
       </ul>
       <p>You can disconnect any of these services at any time in Settings.</p>
 
-      <h3>7. Services Ayla connects to</h3>
+      <h3>7. Focus together (optional)</h3>
+      <p>You can create a focus room or join one with a code; no account is needed. Everyone in the room (up to 8 people) sees your display name (your app or account name, up to 24 characters, which you can change) and your focus status (focusing, on a break, paused or online, and the minutes left).</p>
+      <ul>
+        <li>Rooms run on our Cloudflare server (<code>ayla-rooms</code>) in the European Union. The server keeps no activity logs.</li>
+        <li>Only the room code, a hash of the room owner's key and the time the room was created are written to disk. Your name and status are kept in memory only while you are connected, and are removed when you leave the room or close the tab. A room nobody has joined for 24 hours is deleted completely.</li>
+        <li>Ayla connects only while focus mode or the room window is open.</li>
+        <li>There is no free-text chat, only 4 ready-made reactions. Your email, account ID and IP address are never shown to others in the room.</li>
+        <li>On your device, Ayla keeps the room code, a random member ID, the owner key and the name you chose. This is not synced and not included in backup files.</li>
+      </ul>
+      <p>Share a room code only with people you trust.</p>
+
+      <h3>8. Services Ayla connects to</h3>
       <p>To provide its features, Ayla requests public information from the following services. These requests do not include your account data.</p>
       <table>
         <tr><th>Service</th><th>Purpose and what is sent</th></tr>
         <tr><td>Wikimedia (Commons, Wikidata, Wikipedia)</td><td>Wallpapers and information about the place in the photo</td></tr>
         <tr><td>Open-Meteo</td><td>Weather, rain alerts and city search (city coordinates)</td></tr>
         <tr><td>BigDataCloud</td><td>City name from your coordinates or IP address</td></tr>
-        <tr><td>Central Bank of Uzbekistan (cbu.uz), ExchangeRate-API</td><td>Currency rates</td></tr>
+        <tr><td>Central Bank of Uzbekistan (cbu.uz), ExchangeRate-API</td><td>Currency rates (the currency widget and amounts like "100$" in the search bar)</td></tr>
         <tr><td>Nager.Date</td><td>Public holidays</td></tr>
         <tr><td>MyMemory</td><td>Translating the Wikipedia text about a wallpaper (only that text is sent)</td></tr>
+        <tr><td>Google, Yandex, Microsoft Bing or DuckDuckGo</td><td>Search suggestions, only if you turn on Web suggestions (the text you type goes to the search engine you chose)</td></tr>
+        <tr><td>Your browser's speech recognition service</td><td>Voice search, only if you turn it on (Ayla does not receive the audio)</td></tr>
         <tr><td>Google favicon service</td><td>Icons for your quick links (the site's domain is sent)</td></tr>
         <tr><td>namoz-vaqti.uz, AlAdhan</td><td>Prayer times, only when the prayer widget is available and you add it (city or coordinates)</td></tr>
         <tr><td>Google Firebase, Google Calendar API</td><td>Optional sign-in, sync and calendar</td></tr>
-        <tr><td>Trello (Atlassian), Todoist, ClickUp</td><td>Only if you connect them (section 6)</td></tr>
-        <tr><td>Cloudflare Workers</td><td>Only when you connect ClickUp or Todoist: exchanging the one-time sign-in code for your access key and renewing Todoist's hourly key (nothing is stored)</td></tr>
+        <tr><td>Trello and Jira (Atlassian), Todoist, ClickUp, Notion, Asana, GitHub, Bitrix24, Microsoft To Do, Google Tasks, Slack, Telegram</td><td>Only if you connect them (section 6)</td></tr>
+        <tr><td>Cloudflare Workers</td><td>Only when you connect ClickUp, Todoist, Jira, Notion, Asana, GitHub, Microsoft To Do or Slack: exchanging the one-time sign-in code for your access key and renewing short-lived keys (nothing is stored). If you connect Telegram: the bot bridge described in section 6</td></tr>
+        <tr><td>Cloudflare Workers (European Union)</td><td>Focus together, only if you create or join a room: your display name and focus status are passed to the others in the room (section 7)</td></tr>
       </table>
 
-      <h3>8. Feedback when you uninstall</h3>
+      <h3>9. Feedback when you uninstall</h3>
       <p>When you remove Ayla, a short survey page opens. Answering is optional and anonymous. If you answer, we receive only these:</p>
       <ul>
         <li>the reason you pick;</li>
@@ -108,24 +135,25 @@
       </ul>
       <p>The answer is stored in Firebase and also sent to the developer's private Telegram channel through a Cloudflare Worker, so we can read it quickly. We don't ask for your name, email or any other personal data, so please don't write personal details in the comment.</p>
 
-      <h3>9. Why we process your data (legal bases)</h3>
+      <h3>10. Why we process your data (legal bases)</h3>
       <ul>
         <li><b>Account and sync:</b> to provide the service you asked for (GDPR Art. 6(1)(b)).</li>
-        <li><b>Location, calendar, Trello, Todoist, ClickUp and Time on sites:</b> your consent (Art. 6(1)(a)). You can withdraw it at any time by turning the feature off or disconnecting.</li>
+        <li><b>Location, calendar, the integrations in section 6, Focus together and Time on sites:</b> your consent (Art. 6(1)(a)). You can withdraw it at any time by turning the feature off, leaving the room or disconnecting.</li>
       </ul>
 
-      <h3>10. Where data is stored</h3>
-      <p>Firestore data is stored in Google Cloud's European multi-region (Belgium and the Netherlands). Firebase Authentication is operated by Google and may process sign-in data in the United States, under Google's Standard Contractual Clauses and the EU–US Data Privacy Framework.</p>
+      <h3>11. Where data is stored</h3>
+      <p>Firestore data is stored in Google Cloud's European multi-region (Belgium and the Netherlands). Firebase Authentication is operated by Google and may process sign-in data in the United States, under Google's Standard Contractual Clauses and the EU–US Data Privacy Framework. Focus together rooms run on Cloudflare in the European Union.</p>
       <p>These countries are also on Uzbekistan's list of countries that ensure adequate protection of personal data.</p>
 
-      <h3>11. How long we keep data</h3>
+      <h3>12. How long we keep data</h3>
       <ul>
         <li><b>Account data:</b> kept while your account exists.</li>
         <li><b>Deleted accounts:</b> kept for 30 days so you can restore the account, then permanently deleted.</li>
-        <li><b>On your device:</b> daily focus records are kept for 60 days, the prayer log for 90 days and Time on sites data for 30 days. Everything else stays until you delete it or uninstall Ayla.</li>
+        <li><b>Focus together:</b> your name and status only while you are connected; the room itself until nobody has joined it for 24 hours.</li>
+        <li><b>On your device:</b> daily focus records are kept for 60 days, goal history for about 13 months (400 days), the prayer log for 90 days, Time on sites data for 30 days and daily distraction counts for 14 days. Everything else stays until you delete it or uninstall Ayla.</li>
       </ul>
 
-      <h3>12. Your rights</h3>
+      <h3>13. Your rights</h3>
       <p>You can do all of the following at any time:</p>
       <ul>
         <li>See and download all your data: Settings → Account → My data.</li>
@@ -135,9 +163,9 @@
         <li>Object to processing.</li>
         <li>Complain to your data protection authority.</li>
       </ul>
-      <p>For any request, contact us (section 16).</p>
+      <p>For any request, contact us (section 17).</p>
 
-      <h3>13. What we don't do</h3>
+      <h3>14. What we don't do</h3>
       <ul>
         <li>We don't show ads and don't use analytics or tracking.</li>
         <li>We don't sell, rent or share your personal data with third parties for advertising or any other purpose.</li>
@@ -145,16 +173,16 @@
         <li>Ayla complies with the Chrome Web Store User Data Policy, including the Limited Use requirements.</li>
       </ul>
 
-      <h3>14. Children</h3>
+      <h3>15. Children</h3>
       <ul>
         <li>Accounts are for people aged 16 or older. People under 16 may create one only with a parent's or guardian's consent.</li>
         <li>Without an account, anyone can use Ayla, and no data is collected.</li>
       </ul>
 
-      <h3>15. Changes</h3>
+      <h3>16. Changes</h3>
       <p>If this policy changes, we will update the date above. Significant changes will also be announced in the extension.</p>
 
-      <h3>16. Contact</h3>
+      <h3>17. Contact</h3>
       <p>Ibrohim Qobilov · <a href="https://github.com/Ibrohim-Qobilov/ayla-site/issues">open an issue on GitHub</a>.</p>
 
       <section class="lang" id="uz" lang="uz">
@@ -169,14 +197,16 @@
               <li>«Saytlarda o'tgan vaqt»;</li>
               <li>namoz kundaligi;</li>
               <li>taqvim ulanishi;</li>
-              <li>Trello, Todoist va ClickUp kalitlari.</li>
+              <li>ulangan xizmatlar kalitlari va havolalari (Trello, Todoist, ClickUp, Jira, Notion, Asana, GitHub, Bitrix24, Microsoft To Do, Google Tasks, Slack, Telegram).</li>
             </ul>
           </li>
           <li>Google Taqvim faqat o'qish uchun ulanadi. Tadbirlar faqat qurilmangizda saqlanadi, taqvimingiz o'zgartirilmaydi.</li>
           <li>Joylashuv faqat ob-havo, valyuta va namoz vaqtlari uchun ishlatiladi va qurilmangizda saqlanadi. Yomg'ir ogohlantirishi yoqilsa, ob-havo soatiga bir marta tekshiriladi.</li>
           <li>«Saytlarda o'tgan vaqt» (Plus) standart holatda o'chiq. Yoqsangiz, faol tabdagi saytning nomi (masalan, youtube.com) va unda o'tgan vaqt sanaladi. Bu ma'lumot 30 kun faqat qurilmangizda saqlanadi va hech qayerga yuborilmaydi.</li>
           <li>Kunlik limitda faqat ro'yxatingizdagi saytlar sanaladi. «Saqlangan tablar» va «Keyinroq o'qish» sahifa manzilini faqat siz bosganingizda saqlaydi.</li>
-          <li>Trello, Todoist va ClickUp'ni faqat o'zingiz ulaysiz. Kalitlar qurilmangizda qoladi. ClickUp va Todoist'ga kirishda bir martalik kod (Todoist'da soatiga bir marta kalitni yangilash ham) kichik Cloudflare serverimiz orqali o'tadi, server hech narsa saqlamaydi.</li>
+          <li>«Shorts va Reels» va fokusdagi «Faqat ruxsat berilgan saytlar» standart holatda o'chiq. Yoqsangiz, bloklashni brauzerning o'zi bajaradi: sahifalardan hech narsa o'qilmaydi va hech qayerga yuborilmaydi. Fokus paytidagi chalg'ishlar soni 14 kun faqat qurilmangizda turadi.</li>
+          <li>«Birga fokus» ixtiyoriy va hisobsiz ishlaydi. Xonadagilar (8 kishigacha) ismingizni va fokus holatingizni ko'radi. Ma'lumot Yevropadagi Cloudflare serverimiz orqali o'tadi: ism va holat faqat ulanish davomida turadi, 24 soat hech kim kirmagan xona butunlay o'chadi. Chat yo'q, email va IP boshqalarga ko'rsatilmaydi. Xona kodini faqat ishongan odamingizga bering.</li>
+          <li>Integratsiyalarni (Trello, Todoist, ClickUp, Jira, Notion, Asana, GitHub, Bitrix24, Microsoft To Do, Google Tasks, Slack, Telegram) faqat o'zingiz ulaysiz. Kalitlar qurilmangizda qoladi. Ba'zilarida kirishdagi bir martalik kod va qisqa umrli kalitni yangilash kichik Cloudflare serverimiz orqali o'tadi, server hech narsa saqlamaydi. Bitrix24 havolasi va Google Tasks kaliti bizga umuman yuborilmaydi. Slack'da Ayla faqat fokus paytida holatingizni o'zgartiradi, xabarlaringizni o'qimaydi. Telegram botiga yozgan xabaringiz Telegram va serverimiz orqali o'tadi va Ayla olgach o'chadi.</li>
           <li>Kengaytmani o'chirganingizda qisqa so'rovnoma ochiladi. Javob berish ixtiyoriy va anonim: faqat tanlangan sabab, izoh, til va versiya olinadi. Javob Firebase'da saqlanadi va ishlab chiquvchining yopiq Telegram kanaliga ham yuboriladi. Izohga shaxsiy ma'lumot yozmang.</li>
           <li>Hisob 16 yosh va undan kattalar uchun. Hisobsiz Ayla'dan istalgan yoshdagi odam foydalana oladi.</li>
           <li>Ma'lumotlaringizni ko'rish va yuklab olish: Sozlamalar → Hisob → Ma'lumotlarim.</li>
